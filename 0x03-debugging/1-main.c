@@ -22,3 +22,7 @@ int main(void)
 
 	return (0);
 }
+/**
+ * HEllo - causes
+ * Return: 0
+ */
