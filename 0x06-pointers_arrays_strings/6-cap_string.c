@@ -2,56 +2,22 @@
 #include <stdio.h>
 
 /**
- * isLower - determine whather asci is Lowercase
- * @c: character
- * Return: 1 if true, 0 if fales
- */
-int isLower(char c)
-{
-	return (c >= 97 && c <= 122);
-}
-
-/**
- * isDelimiter - determines whater ascii is a delin
- * @c: character
- * Return: 1 if true, 0 if false
+ * cap_string - capitalizes words
+ * @str: string
+ * Return: pointer to string
  */
 
-int isDelimiter(char c)
+char *cap_string(char *str)
 {
-	int i;
-	char delimiter[] = " \t\n,.!?\"() ()";
+	int i = 0;
 
-	for (i = 0; i < 12; i++)
-		if (c == delimiter[i])
-			return (1);
-	return (0);
-}
-
-/**
- * cap_string - Capitalies all words of a string
- * @s: input string
- *
- * Return: string with capitalized words
- */
-
-char *cap_string(char *)
-{
-	char *ptr = s;
-	int found = 1;
-
-	while (*s)
+	while (str[i])
 	{
-		if (isDelimiter(*s))
-			found = 1;
-		else if (isLower(*s) && found)
-		{
-			*s -= 32;
-			found = 0;
-		}
-		else
-			found = 0;
-		s++;
+		while (!(str[i] >= 'a' && str[i] <= 'z'))
+			i++;
+		if (str[i - 1] == ' ' || str[i - 1] == '\t' || str[i - 1] == '\n' || str[i - 1] == ',' || str[i - 1] == ';' || str[i - 1] == '.' || str[i - 1] == '!' || str[i - 1] == '?' || str[i - 1] == '"' || str[i - 1] == '(' || str[i - 1] == ')' || str[i - 1] == '{' || str[i - 1] == '}' || i == 0)
+			str[i] -= 32;
+		i++;
 	}
-	return (ptr);
+	return (str);
 }
