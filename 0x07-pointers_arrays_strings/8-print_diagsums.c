@@ -1,29 +1,23 @@
 #include "main.h"
 #include <stdio.h>
-
 /**
- * print_diagsums - Entry point
- *
- * a: array
- * @size: size of array
- * return: 0
- */
-
+* print_diagsums - print the sum of the two diagonals of a squeare matrix
+*
+* @a: pointer to an integer
+* @size: int type
+*
+* Description: this print the chessboard
+* Return: void
+*/
 void print_diagsums(int *a, int size)
 {
-	int i, sum1 = 0, sum2 = 0;
+	int s;
+	int diagonal1 = 0;
+	int diagonal2 = 0;
 
-	for (i = 0; i < size; i++)
-	{
-		sum1 += a[i];
-		a += size;
-	}
-	a -= size;
-
-	for (i = 0; i < size; i++)
-	{
-		sum2 += a[i];
-		a -= size;
-	}
-	printf("%d, %d\n", sum1, sum2);
+	for (s = 0; s < size; s++)
+		diagonal1 = diagonal1 + a[(size + 1) * s];
+	for (s = 1; s < size + 1; s++)
+		diagonal2 = diagonal2 + a[(size - 1) * s];
+	printf("%d, %d\n", diagonal1, diagonal2);
 }
