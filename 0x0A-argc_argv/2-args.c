@@ -8,15 +8,12 @@
  * Return: Always 0
  */
 
-int main(int argc, char const *argv[])
+int main(int argc, char *argv[])
 {
-	int i = 0;
+	int x;
 
-	while (argc--)
-	{
-		printf("%s\n", argv[i]);
-		i++;
-	}
+	for (x = 0; x < argc; x++)
+		printf("%s\n", argv[x]);
 
 	return (0);
 }
