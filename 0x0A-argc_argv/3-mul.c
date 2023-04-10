@@ -3,12 +3,10 @@
 #include "main.h"
 
 /**
- * main - Entry point
- *
- * @argc: pointer
- * @argv: pointer
- *
- * Return: always 0
+ * main - Program that takes first two integer arguments and prints the product
+ * @argc: Number of command line arguments
+ * @argv: Array name
+ * Return: 1 if not enough arguments passed in, 0 otherwise
  */
 
 int main(int argc, char *argv[])
