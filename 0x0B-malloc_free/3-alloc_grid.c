@@ -1,40 +1,40 @@
-#include "main.h"
-#include <stdio.h>
 #include <stdlib.h>
+#include "main.h"
 
 /**
- * alloc_grid - Entry point
- *
- * @width: int
- * @height: int
- *
- * Return: 0
+ * alloc_grid - allocates a matrix of integers
+ * @width: width of grid
+ * @height: height of grid
+ * Return: return  void
  */
 
 int **alloc_grid(int width, int height)
 {
-	int **t;
-	t = malloc(sizeof(*t) * height);
+	int **grid;
+	int i, j;
 
-	if (width <= 0 || height <= 0 || t == 0)
+	if (width <= 0 || height <= 0)
 		return (NULL);
-	else
+
+	grid = malloc(height * sizeof(int *));
+	if (grid == NULL)
+		return (NULL);
+
+	for (i = 0; i < height; i++)
 	{
-		for (int i = 0; i < height; i++)
+		grid[i] = malloc(width * sizeof(int));
+		if (grid[i] == NULL)
 		{
-			t[i] = malloc(sizeof(**t) * width);
-			if (t[i] == 0)
-			{
-				while (--i)
-					free(t[i]);
-				free(t);
-				return (NULL);
-			}
-			for (int j = 0; j < width; j++)
-			{
-				t[i][j] = 0;
-			}
+			while (i >= 0)
+				free(grid[i--]);
+			free(grid);
+			return (NULL);
 		}
+
+
+		for (j = 0; j < width; j++)
+			grid[i][j] = 0;
 	}
-	return (t);
+
+	return (grid);
 }

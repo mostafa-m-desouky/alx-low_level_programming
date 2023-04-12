@@ -1,21 +1,20 @@
-#include "main.h"
-#include <stdio.h>
 #include <stdlib.h>
+#include "main.h"
+
 
 /**
- * free_grid - Entry point
- *
- * @grid: pointer
- * @height: int
- *
- * Return: 0
+ * free_grid - free up grid allocated by alloc_grid
+ * @grid: - grid to free
+ * @height: - height of grid
+ * Return: return  void
  */
-
 void free_grid(int **grid, int height)
 {
-	for (int i = 0; i < height; i++)
-	{
-		free(grid[i]);
-	}
+	if (!grid)
+		return;
+	if (!grid[0])
+		return;
+	while (height-- > 0)
+		free(grid[height]);
 	free(grid);
 }
