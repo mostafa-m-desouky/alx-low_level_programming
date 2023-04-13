@@ -1,23 +1,6 @@
 #include "main.h"
 
 /**
- * calloc_function - fills memory
- * @p: pointer
- * @b: char
- * @n: int
- * Return: p
- */
-char *calloc_function(char *p, char b, unsigned int n)
-{
-	char *ptr = p;
-
-	while (n--)
-		*p++ = b;
-
-	return (ptr);
-}
-
-/**
  * _calloc - Entry point
  *
  * @nmemb: int
@@ -28,15 +11,21 @@ char *calloc_function(char *p, char b, unsigned int n)
 
 void *_calloc(unsigned int nmemb, unsigned int size)
 {
-	void *l;
+	int i = 0, l = 0;
+	char *n;
 
-	if (size == 0 || nmemb == 0)
+	if (nmemb == 0 || size == 0)
 		return (0);
 
-	l = malloc(sizeof(int) * nmemb);
-	if (l == NULL)
-		return (0);
-	calloc_function(l, 0, sizeof(int) * nmemb);
+	l = nmemb * size;
+	n = malloc(l);
 
-	return (l);
+	if (n == 0)
+		return (0);
+	while (i < l)
+	{
+		n[i] = 0;
+		i++;
+	}
+	return (n);
 }
