@@ -9,12 +9,13 @@
  */
 int _strlen(char *s)
 {
-int len = 0;
-while (*s++)
-{
-len++;
-}
-return (len);
+	int len = 0;
+
+	while (*s++)
+	{
+		len++;
+	}
+	return (len);
 }
 
 /**
@@ -26,13 +27,14 @@ return (len);
 
 char *_strcpy(char *dest, char *src)
 {
-char *temp = dest;
-while (*src)
-{
-*dest++ = *src++;
-}
-*dest = '\0';
-return (temp);
+	char *temp = dest;
+
+	while (*src)
+	{
+		*dest++ = *src++;
+	}
+	*dest = '\0';
+	return (temp);
 }
 
 /**
