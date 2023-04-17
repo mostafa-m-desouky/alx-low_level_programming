@@ -1,6 +1,5 @@
-#ifndef _PI_H
-#define _PI_H
-
+#ifndef FILE_MACRO
+#define FILE_MACRO
 #define PI 3.14159265359
 
-#endif /* _PI_H */
+#endif
