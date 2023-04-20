@@ -1,3 +1,8 @@
+#ifndef _CALC_H
+#define _CALC_H
+
+#include "function_pointers.h"
+
 /**
  * struct op - Struct op
  *
