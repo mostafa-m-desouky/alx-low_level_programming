@@ -1,5 +1,7 @@
 #include "3-calc.h"
-#include "function_pointers.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 /**
  * get_op_func - get an operation
