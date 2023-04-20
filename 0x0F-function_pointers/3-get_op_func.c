@@ -2,30 +2,31 @@
 #include "function_pointers.h"
 
 /**
- * get_op_func - pointer
- *
- * @s: char
- *
- * Return: pointer function
+ * get_op_func - get an operation
+ * @s: The operator passed as argument to the program
+ * Return: No
  */
-
 int (*get_op_func(char *s))(int, int)
 {
-	op_t ops[] = {
-		{"+", op_add},
-		{"-", op_sub},
-		{"*", op_mul},
-		{"/", op_div},
-		{"%", op_mod},
-		{NULL, NULL}
-	};
-	int i;
+op_t ops[] = {
+{"+", op_add},
+{"-", op_sub},
+{"*", op_mul},
+{"/", op_div},
+{"%", op_mod},
+{NULL, NULL}
+};
 
-	for (i = 0; i < 5; i++)
-	{
-		if (s && s[0] == ops[i].op[0] && !s[1])
-			return (ops[i].f);
-	}
+int i = 0;
 
-	return (0);
+while (ops[i].op)
+{
+if (strcmp(s, ops[i].op) == 0)
+{
+return (ops[i].f);
+}
+i++;
+}
+printf("Error\n");
+exit(99);
 }

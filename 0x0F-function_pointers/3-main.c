@@ -4,15 +4,11 @@
 
 /**
  * main - Entry point
+ * @argc: The number of arguments passed to the program
+ * @argv: An array containing the arguments passed to the program
  *
- *@argc: the number of argument
- *
- * @argv: argument vector
- *
- * Return: Always 0
+ * Return: Always 0 (Success)
  */
-
-
 int main(int argc, char *argv[])
 {
 int x;
