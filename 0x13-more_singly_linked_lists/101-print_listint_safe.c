@@ -1,18 +1,20 @@
 #include "lists.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 /**
- * _r - reallocates memory
- * @list: address of pointer
- * @size: size_t
- * @new: new node
+ * _r - reallocates memory for an array of pointers
+ * to the nodes in alinked list
+ * @list: the old list append
+ * @size: size of the new list (always one more than the old list )
+ * @new: new node to add to the list
  *
- * Return: pointer
+ * Return: pointer to the new list
  */
-
 const listint_t **_r(const listint_t **list, size_t size, const listint_t *new)
 {
 	const listint_t **newlist;
-	size_t i = 0;
+	size_t i;
 
 	newlist = malloc(size * sizeof(listint_t *));
 	if (newlist == NULL)
@@ -20,33 +22,27 @@ const listint_t **_r(const listint_t **list, size_t size, const listint_t *new)
 		free(list);
 		exit(98);
 	}
-	while (i < size - 1)
-	{
+	for (i = 0; i < size - 1; i++)
 		newlist[i] = list[i];
-		i++;
-	}
 	newlist[i] = new;
 	free(list);
 	return (newlist);
 }
-
-
 /**
- * print_listint_safe - Entry point
+ * print_listint_safe - Prints a listint_t list safely.
+ * @head: A pointer to the head of the listint_t list.
  *
- * @head: pointer
- *
- * Return: the number of nodes in the list
+ * Return: The number of nodes in the list.
  */
 
 size_t print_listint_safe(const listint_t *head)
 {
-	int i = 0, num = 0;
+	size_t i, num = 0;
 	const listint_t **list = NULL;
 
 	while (head != NULL)
 	{
-		while (i < num)
+		for (i = 0; i < num; i++)
 		{
 			if (head == list[i])
 			{
@@ -54,7 +50,6 @@ size_t print_listint_safe(const listint_t *head)
 				free(list);
 				return (num);
 			}
-			i++;
 		}
 		num++;
 		list = _r(list, num, head);
