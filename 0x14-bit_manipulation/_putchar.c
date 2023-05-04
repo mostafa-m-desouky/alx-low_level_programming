@@ -1,4 +1,5 @@
 #include "main.h"
+#include <unistd.h>
 
 /**
  * _outchar - writes the character
@@ -10,5 +11,5 @@
 
 int _putchar(char c)
 {
-	return (fwrite(1, &c, 1));
+	return (write(1, &c, 1));
 }
