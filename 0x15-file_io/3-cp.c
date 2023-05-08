@@ -1,94 +1,78 @@
 #include "main.h"
 
-char *create_buffer(char *file);
-void close_file(int fd);
-
 /**
- * create_buffer - allocates 1024 bytes for a buffer
+ * main - program that copies the content of a file to another file.
  *
- * @file: pointer
+ * @ac: number of arguments passed to the program.
+ * @av: array of arguments passed to program.
  *
- * Return: pointer
+ * Return:
+ *	- 0 Success.
  */
 
-char *create_buffer(char *file)
+int main(int ac, char *av[])
 {
-	char *buffer;
+	int fto, ffrom, s = 0, len = 0;
+	char buff[MAX_BUFF];
 
-	buffer = malloc(sizeof(char) * 1024);
-
-	if (buffer == NULL)
+	if (ac != 3)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file);
-		exit(99);
-	}
-
-	return (buffer);
-}
-
-/**
- * close_file - closes file descriptors
- * @fd: the file descriptor
- *
- * Return: void
- */
-
-void close_file(int fd)
-{
-	int c;
-
-	c = close(fd);
-
-	if (c == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
-		exit(100);
-	}
-}
-
-/**
- * main - copies the contents
- * @argc: the number of arguments
- * @argv: An array of pointer
- *
- * Return: 0 on success
- */
-
-int main(int argc, char *argv[])
-{
-	int from, to, r, w;
-	char *buffer;
-
-	if (argc != 3)
-	{
-		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+		dprintf(2, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
-	buffer = create_buffer(argv[2]);
-	from = open(argv[1], O_RDONLY);
-	r = read(from, buffer, 1024);
-	to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 
-	do {
-		if (from == -1 || r == -1)
-		{
-			dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
-			free(buffer);
-			exit(98);
-		}
-		w = write(to, buffer, r);
-		if (to == -1 || w == -1)
-		{
-			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-			free(buffer);
-			exit(99);
-		}
-		r = read(from, buffer, 1024);
-		to = open(argv[2], O_WRONLY | O_APPEND);
-	} while (r > 0);
-	free(buffer);
-	close_file(from);
-	close_file(to);
+	ffrom = open(av[1], O_RDONLY);
+	if (ffrom < 0 || !av[1])
+		print_error(98, av[1], 0);
+	fto = open(av[2], O_CREAT | O_TRUNC | O_WRONLY, 0664);
+	if (fto < 0 || !av[2])
+		print_error(99, av[2], 0);
+	while ((len = read(ffrom, buff, MAX_BUFF)) > 0)
+	{
 
+		s = write(fto, buff, len);
+		if (s < 0)
+			print_error(99, av[2], 0);
+	}
+	if (len < 0)
+		print_error(98, av[1], 0);
+	s = close(ffrom);
+	if (s < 0)
+		print_error(100, NULL, ffrom);
+	s = close(fto);
+	if (s < 0)
+		print_error(1002, NULL, fto);
+	return (0);
+}
+
+/**
+ * print_error -  prints message error on the POSIX standard error
+ *			and hanlde exit status.
+ * @e: type of error.(exit status).
+ * @name: name of the file concernong error.
+ * @d: descriptor.
+ * Return:
+ *	- 0 Success.
+ */
+
+int print_error(int e, char *name, int d)
+{
+	if (e == 98)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", name);
+		exit(e);
+	}
+	else if (e == 99)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", name);
+		exit(e);
+	}
+	else if (e == 100)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", d);
+		exit(e);
+	}
+	else
+		dprintf(STDERR_FILENO, "Unknown error\n");
 	return (0);
 }
