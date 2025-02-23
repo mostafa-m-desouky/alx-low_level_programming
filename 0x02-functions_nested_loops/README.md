@@ -35,6 +35,8 @@ File: `_putchar.c` contains the _putchar() function definition.
 
 ## Advanced Task
 
+### ===> File `9-times_table.c` Write a function that prints the 9 times table, starting with 0.
+
 #### ===> File `100-times_table.c` is a function that prints the n times table, starting with 0.
 
 #### ===> File `101-natural.c` is a program that computes and prints the sum of all the multiples of 3 or 5 below 1024 (excluded), followed by a new line.
