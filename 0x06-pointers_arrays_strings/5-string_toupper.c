@@ -8,15 +8,12 @@
  * Return: A pointer to the changed string.
  */
 
-char *string_toupper(char *str)
-{
-	int index = 0;
-
-	while (str[index])
-	{
-		if (str[index] >= 'a' && str[index] <= 'z')
-			str[index] -= 32;
-		index++;
-	}
-	return (str);
+char *string_toupper(char *str) {
+    int i;
+    for (i = 0; str[i] != '\0'; i++) {
+        if (str[i] >= 'a' && str[i] <= 'z') {
+            str[i] = str[i] - 32;
+        }
+    }
+    return(str);
 }
