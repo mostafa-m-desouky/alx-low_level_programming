@@ -16,10 +16,10 @@ int _atoi(char *s)
 	f = 0;
 	digit = 0;
 
-	for (; *s != '\0'; s++)
+	while (s[len] != '\0')
 		len++;
 
-	for (i; i < len && f == 0; i++;)
+	while (i < len && f == 0)
 	{
 		if (s[i] == '-')
 			++d;
@@ -35,6 +35,7 @@ int _atoi(char *s)
 				break;
 			f = 0;
 		}
+		i++;
 	}
 
 	if (f == 0)
@@ -42,3 +43,4 @@ int _atoi(char *s)
 
 	return (n);
 }
+
