@@ -1,13 +1,11 @@
 #include <stdio.h>
 
 /**
- * main - Entry point
+ * main - prints the name of the program
+ * @argc: number of arguments
+ * @argv: array of arguments
  *
- * @argc: integer
- *
- * @argv: list
- *
- * Return: Always 0.
+ * Return: Always 0 (Success)
  */
 
 int main(int argc, char const *argv[])
