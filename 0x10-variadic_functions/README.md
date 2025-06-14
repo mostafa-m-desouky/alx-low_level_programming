@@ -1,55 +1,47 @@
-# C - Singly linked lists
+# C - Variadic functions
 
-In this project, I practiced building and using singly linked lists
-in C while learning when and why to use linked lists versus arrays.
+In this project, I learned about using variadic functions with the `va_start`,
+`va_arg`, and `va_end` macros as well as why and how to use the `const` type qualifier in C.
 
 ## Header File :file_folder:
 
-* [lists.h](./lists.h): Header file containing definitions and prototypes for all
-types and functions written for the project.
+* [variadic_functions.h](./variadic_functions.h): Header file containing definitions and
+prototypes for all types and functions written in the project.
 
-| Type/File          | Definition/Prototype                                                                   |
-| ------------------ | -------------------------------------------------------------------------------------- |
-| `struct list_s`    | <ul><li>`char *str`</li><li>`unsigned int len`</li><li>`struct list_s *next`</li></ul> |
-| `typedef list_t`   | `struct list_s`                                                                        |
-| `0-print_list.c`   | `size_t print_list(const list_t *h);`                                                  |
-| `1-list_len.c`     | `size_t list_len(const list_t *h);`                                                    |
-| `2-add_node.c`     | `list_t *add_node(list_t **head, const char *str);`                                    |
-| `3-add_node_end.c` | `list_t *add_node_end(list_t **head, const char *str);`                                |
-| `4-free_list.c`    | `void free_list(list_t *head)`                                                         |
+| File                     | Definition/Prototype                                                    |
+| ------------------------ | ----------------------------------------------------------------------- |
+| `0-sum_them_all.c`       | `int sum_them_all(const unsigned int n, ...);`                          |
+| `1-print_numbers.c`      | `void print_numbers(const char *separator, const unsigned int n, ...);` |
+| `2-print_strings.c`      | `void print_strings(const char *separator, const unsigned int n, ...);` |
+| `3-print_all.c`          | `void print_all(const char * const format, ...);`                       |                                                     
 
 ## Tasks :page_with_curl:
 
-* **0. Print list**
-  * [0-print_list.c](./0-print_list.c): C function that prints all the
-  elements of a `list_t` list.
-    * If `str` is `NULL`, the function prints `[0] (nil)`.
+* **0. Beauty is variable, ugliness is constant**
+  * [0-sum_them_all.c](./0-sum_them_all.c): C function that returns the sum of
+  all its paramters.
+    * If the parameter `n == 0`, the function returns `0`.
 
-* **1. List length**
-  * [1-list_len.c](./1-list_len.c): C function that returns the number of elements
-  in a linked `list_t` list.
+* **1. To be is to be the value of a variable**
+  * [1-print_numbers.c](./1-print_numbers.c): C function that prints numbers,
+  followed by a new line.
+    * The paramter `separator` is the string to be printed between numbers.
+    * The paramter `n` is the number of integers passed to the function.
+    * If `separator` is `NULL`, it is not printed.
 
-* **2. Add node**
-  * [2-add_node.c](./2-add_node.c): C function that adds a new node at the
-  beginning a of a `list_t` list.
-    * If the function fails - returns `NULL`.
-    * Otherwise - returns the address of the new element.
+* **2. One woman's constant is another woman's variable**
+  * [2-print_strings.c](./2-print_strings.c): C function that prints strings,
+  followed by a new line.
+    * The parameter `separator` is the string to be printed between the strings.
+    * The parameter `n` is the number of strings passed to the function.
+    * If `separator` is `NULL`, it is not printed.
+    * If one of the strings is `NULL`, the function prints `(nil)` instead.
 
-* **3. Add node at the end**
-  * [3-add_node_end.c](./3-add_node_end.c): C function that adds a new node at
-  the end of a linked `list_t` list.
-    * If the function fails - returns `NULL`.
-    * Otherwise - returns the address of the new element.
-
-* **4. Free list**
-  * [4-free_list.c](./4-free_list.c): C function that frees a `list_t` list.
-
-* **5. The Hare and the Tortoise**
-  * [100-first.c](./100-first.c): C function that prints `You're beat! and
-  yet, you must allow,\nI bore my house upon my back!\n` before the `main`
-  function is executed.
-
-* **6. Real programmers can write assembly code in any language**
-  * [101-hello_school.asm](./101-hello_school.asm): 64-but assembly program
-  that prints `Hello, School` followed by a new line using only the
-  `printf` function without interrupts.
+* **3. To be is a to be the value of a variable**
+  * [3-print_all.c](./3-print_all.c): C function that prints anything.
+    * Usage: `print_all("ceis", 'H', 0, "lberton");`
+    * The paramter `format` is a list of types of arguments passed to the function
+    (`c`:`char`, `i`:`int`, `f`:`float`, `s`:`char *` (if the string is
+    `NULL`, `(nil)` is printed instead))
+    * Any other character is ignored.
+    * A new line is printed at the end of the function.
