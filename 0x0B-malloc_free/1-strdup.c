@@ -5,26 +5,25 @@
  * @str: string to duplicate
  * Return: 0
  */
-char *_strdup(char *str)
-{
-	int size = 0;
-	char *ptr, *ret;
+char *_strdup(char *str) {
+        int i, l = 0;
+        char *copy;
 
-	if (!str)
-		return (NULL);
-
-	ptr = str;
-	while (*ptr++)
-		size++;
-
-	ret = malloc(size + 1);
-	if (!ret)
-		return (NULL);
-
-	ptr = ret;
-	while (*str)
-		*ptr++ = *str++;
-
-	*ptr = 0;
-	return (ret);
+        if (str == NULL)
+                return NULL;
+	
+        for (i = 0; str[i] != '\0'; i++)
+                l++;
+	
+        copy = malloc(sizeof(char) * (l + 1));
+	
+        if (copy == NULL)
+                return NULL;
+	
+        for (i = 0; i < l; i++)
+                copy[i] = str[i];
+	
+        copy[i] = '\0';
+	
+        return copy;
 }
