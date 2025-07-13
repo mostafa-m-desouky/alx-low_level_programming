@@ -7,35 +7,32 @@
  * Return: pointer to newly allocated string concatenation
  */
 
-char *str_concat(char *s1, char *s2)
-{
-	unsigned int size1 = 0, size2 = 0;
-	char *ptr, *ret;
+char *str_concat(char *s1, char *s2) {
+    int i, l1 = 0, l2 = 0;
+    char *concat;
 
-	ptr = s1;
-	if (s1)
-		while (*ptr++)
-			size1++;
-	else
-		s1 = "";
+    if (s1 == NULL)
+        s1 = "";
+    if (s2 == NULL)
+        s2 = "";
 
-	ptr = s2;
-	if (s2)
-		while (*ptr++)
-			size2++;
-	else
-		s2 = "";
+    for (i = 0; s1[i] != '\0'; i++)
+        l1++;
+    for (i = 0; s2[i] != '\0'; i++)
+        l2++;
 
-	ret = malloc(size1 + size2 + 1);
-	if (!ret)
-		return (NULL);
+    concat = malloc(sizeof(char) * (l1 + l2 + 1));
 
-	ptr = ret;
-	while (*s1)
-		*ptr++ = *s1++;
-	while (*s2)
-		*ptr++ = *s2++;
-	*ptr = 0;
+    if (concat == NULL)
+        return NULL;
 
-	return (ret);
+    for (i = 0; i < l1; i++)
+        concat[i] = s1[i];
+	
+    for (i = 0; i < l2; i++)
+        concat[l1 + i] = s2[i];
+
+    concat[l1 + l2] = '\0';
+
+    return concat;
 }
