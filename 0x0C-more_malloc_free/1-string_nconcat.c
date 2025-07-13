@@ -12,29 +12,38 @@
 
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	char *s;
-	unsigned int i, m, s1_l, s2_l;
+    unsigned int i, l1 = 0, l2 = 0;
+    char *concat;
 
-	if (s1 == 0)
-		s1 = "";
-	if (s2 == 0)
-		s2 = "";
+    if (s1 == NULL)
+        s1 = "";
+    if (s2 == NULL)
+        s2 = "";
 
-	for (s1_l = 0; s1[s1_l] != '\0'; s1_l++)
-		;
-	for (s2_l = 0; s2[s2_l] != '\0'; s2_l++)
-		;
-	s = malloc(s1_l + n + 1);
-	if (s == 0)
-		return (0);
+    // calculate length of s1
+    for (i = 0; s1[i] != '\0'; i++)
+        l1++;
 
-	for (i = 0; s1[i] != '\0'; i++)
-		s[i] = s1[i];
-	for (m = 0; m < n; m++)
-	{
-		s[i] = s2[m];
-		i++;
-	}
-	s[i] = '\0';
-	return (s);
+    // calculate length of s2
+    for (i = 0; s2[i] != '\0'; i++)
+        l2++;
+
+    if (n > l2)
+        n = l2;
+
+    concat = malloc(sizeof(char) * (l1 + n + 1));
+    if (concat == NULL)
+        return NULL;
+
+    // copy s1
+    for (i = 0; i < l1; i++)
+        concat[i] = s1[i];
+
+    // copy n characters from s2
+    for (unsigned int j = 0; j < n; j++)
+        concat[l1 + j] = s2[j];
+
+    concat[l1 + n] = '\0';
+
+    return concat;
 }
